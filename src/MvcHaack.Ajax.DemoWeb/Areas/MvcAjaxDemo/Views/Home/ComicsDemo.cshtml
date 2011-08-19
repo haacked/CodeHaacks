@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Simple Comics Demo";
+}
+
+@section Scripts {
+    <script src="../../Scripts/jquery-1.6.2.js" type="text/javascript"></script>
+    <script src="/json/comicsdemo?json"></script>
+    <script src="/Scripts/comicsdemo.js"></script>
+}
+<p>
+    Click on the button to make a call to <code>ComicsDemoController</code>'s 
+    <code>List</code> method and populate an unordered list with the comics returned by that method.
+</p>
+
+<ul id="comics"></ul>
+
+<button id="loadButton">Load Comics</button>
+
+<hr />
+<fieldset class="code">
+    <legend>comicsdemo.html</legend>
+<pre class="csharpcode"><span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">src</span><span class="kwrd">=&quot;../../Scripts/jquery-1.6.2.js&quot;</span> <span class="attr">type</span><span class="kwrd">=&quot;text/javascript&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">src</span><span class="kwrd">=&quot;/json/comicsdemo?json&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">src</span><span class="kwrd">=&quot;/Scripts/comicsdemo.js&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span>
+
+<span class="kwrd">&lt;</span><span class="html">ul</span> <span class="attr">id</span><span class="kwrd">=&quot;comics&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">ul</span><span class="kwrd">&gt;</span>
+
+<span class="kwrd">&lt;</span><span class="html">button</span> <span class="attr">id</span><span class="kwrd">=&quot;loadButton&quot;</span><span class="kwrd">&gt;</span>Load Comics<span class="kwrd">&lt;/</span><span class="html">button</span><span class="kwrd">&gt;</span></pre>
+</fieldset>
+
+<fieldset class="code">
+    <legend>comicsdemo.js</legend>
+
+    <pre class="csharpcode">
+$(<span class="kwrd">function</span>() {
+    $(<span class="str">'#loadButton'</span>).click(
+        <span class="kwrd">function</span>() {
+            $mvc.ComicsDemo.List().success(<span class="kwrd">function</span>(data) {
+                $.each(data, <span class="kwrd">function</span>() {
+                    $(<span class="str">'#comics'</span>).append(<span class="str">'&lt;li&gt;'</span> + <span class="kwrd">this</span>.Title + <span class="str">'&lt;/li&gt;'</span>);
+                });
+            });    
+        }
+    );
+});</pre>
+</fieldset>

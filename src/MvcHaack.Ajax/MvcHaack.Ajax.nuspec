@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <version>$version$</version>
+        <authors>$author$</authors>
+        <owners>$author$</owners>
+        <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+        <projectUrl>https://bitbucket.org/haacked/codehaacks</projectUrl>
+        <iconUrl>http://haacked.com/images/Inspector-120x120.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>$description$</description>
+        <tags>aspnetmvc asp.net aspnet asp.net-mvc controllerdescriptor controller</tags>
+    </metadata>
+</package>

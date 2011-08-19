@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "ComicsDemoPostback";
+}
+
+@section Scripts {
+    <script src="../../Scripts/jquery-1.6.2.js" type="text/javascript"></script>
+    <script src="/json/comicsdemo?json"></script>
+    <script src="/Scripts/comicsdemo.js"></script>
+}
+
+<h2>Simple Comics Post Demo</h2>
+
+<button id="post">Click to post a comic to the server</button>
+
+<script>
+    $(function() {
+        $('#post').click(function() {
+            $mvc.ComicsDemo.Save({ Title: 'Adventurers', Issue: 123 }).success(function(data) {
+                alert(data.message + ' Comic: ' + data.comic.Title);
+            });
+        });
+    });
+</script>
+
+<hr />
+
+<fieldset class="code">
+    <legend>comicspostdemo.html</legend>
+
+<pre class="csharpcode">
+<span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">src</span><span class="kwrd">="../../Scripts/jquery-1.6.2.js"</span> <span class="attr">type</span><span class="kwrd">="text/javascript"</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">src</span><span class="kwrd">="/json/comicsdemo?json"</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">src</span><span class="kwrd">="/Scripts/comicsdemo.js"</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span>
+
+<span class="kwrd">&lt;</span><span class="html">h2</span><span class="kwrd">&gt;</span>Simple Comics Post Demo<span class="kwrd">&lt;/</span><span class="html">h2</span><span class="kwrd">&gt;</span>
+
+<span class="kwrd">&lt;</span><span class="html">button</span> <span class="attr">id</span><span class="kwrd">="post"</span><span class="kwrd">&gt;</span>Click to post a comic to the server<span class="kwrd">&lt;/</span><span class="html">button</span><span class="kwrd">&gt;</span>
+
+<span class="kwrd">&lt;</span><span class="html">script</span><span class="kwrd">&gt;</span>
+    $(<span class="kwrd">function</span>() {
+        $(<span class="str">'#post'</span>).click(<span class="kwrd">function</span>() {
+            $mvc.ComicsDemo.Save({ Title: <span class="str">'Adventurers'</span>, Issue: 123 }).success(<span class="kwrd">function</span>(data) {
+                alert(data.message + <span class="str">' Comic: '</span> + data.comic.Title);
+            });
+        });
+    });
+<span class="kwrd">&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span></pre>
+
+</fieldset>

@@ -1,0 +1,211 @@
+﻿@* Generator : Template TypeVisibility : Internal *@
+@using System.Web.Mvc
+@using Microsoft.CSharp
+@using MvcHaack.ControllerInspector
+@functions {
+    public dynamic Model { get; set; }
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.ControllerName Details - Controller Inspector</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 0.9em;
+            font-family: calibri, verdana, sans-serif;
+            color: #232323;
+            background-color: #fff;
+        }
+        
+        h1 {
+            margin: 0;
+            padding: 8px 0 4px 8px;
+            color: #fff; 
+            font-size: 2em; 
+            background-color: #036; 
+            width: 100%; 
+            font-weight: normal;
+        }
+        
+        h1 em {
+            font-size: .7em;
+        }
+        
+        h2 {
+            font-size: 1.5em; 
+            margin: 25px 0 10px 0; 
+            border-top: 1px solid #003366; 
+            color: #003366; 
+        }
+        
+        h3 {
+            font-size: 1em;
+            margin: 8px 0 4px 0;
+        }
+                
+        div#main {
+            padding: 8px 0 8px 12px; 
+        }
+        
+        table {
+            font-family: calibri;
+            font-size: 1em;
+            border-collapse: collapse;
+            margin-left: 10px;
+        }
+        
+        table {
+            border: solid 1px;
+        }
+                
+        table td, table th {
+            border: solid 1px #666;
+            padding: 4px 6px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        ul {
+            margin: 0 0 0 4px;
+            padding: 0 0 0 8px;
+            margin-left: 20px;
+        }
+        
+        span.verbs {
+            font-size: 0.9em;
+            font-weight: normal;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>@Model.ControllerName Controller (<em>@Model.ControllerType.Namespace</em>)</h1>
+    </header>
+    <div id="main">
+        <p>The following filters are defined globally:</p>
+        <table>
+            <tr>
+                <th>name</th>
+                <th>namespace</th>
+                <th>details</th>
+            </tr>
+            @foreach (var filter in Model.GlobalFilters) {
+            <tr>
+                <td>@filter.Name</td>
+                <td>@filter.Namespace</td>
+                <td>
+                    <ul>
+                    @foreach (var property in filter.Properties) {
+                        <li>@property.Name = @property.Value</li>
+                    }
+                    </ul>
+                </td>
+            </tr>
+            }
+        </table>
+
+        <p>The following attributes are defined on this controller:</p>
+        <table>
+            <tr>
+                <th>name</th>
+                <th>namespace</th>
+                <th>details</th>
+            </tr>
+            @foreach (var attribute in Model.ControllerType.Attributes) {
+            <tr>
+                <td>@attribute.Name</td>
+                <td>@attribute.Namespace</td>
+                <td>
+                    <ul>
+                    @foreach (var property in attribute.Properties) {
+                        <li>@property.Name = @property.Value</li>
+                    }
+                    </ul>
+                </td>
+            </tr>
+            }
+        </table>
+        
+        <p>This controller contains the following actions:</p>
+        
+        <ul>
+            @foreach (var action in Model.Actions) {
+            <li><a href="#@action.Id">@action.Name <span class="verbs">@String.Join(", ", action.Verbs)</span></a></li>
+            }
+        </ul>
+        
+        @foreach (var action in Model.Actions) {
+            <h2 id="@action.Id">@action.Name <span class="verbs">@String.Join(", ", action.Verbs)</span></h2>
+            <h3>Return Value</h3>
+            <p><code>@action.ReturnType</code></p>
+
+            <h3>Parameters</h3>
+            <table>
+                <tr>
+                    <th>name</th>
+                    <th>type</th>
+                    <th>default</th>
+                </tr>
+                @foreach (var parameter in action.Parameters) {
+                <tr>
+                    <td>
+                        @if (parameter.IsComplexType) {
+                            <a href="#@parameter.Type.FullName">@parameter.Name</a>
+                        }
+                        else {
+                            @parameter.Name
+                        }
+                    </td>
+                    <td>@parameter.Type</td>
+                    <td>@parameter.DefaultValue</td>
+                </tr>
+                }
+            </table>
+            
+            <h3>Attributes</h3>
+            <table>
+                <tr>
+                    <th>name</th>
+                    <th>namespace</th>
+                    <th>details</th>
+                </tr>
+                @foreach (var attribute in action.Attributes) {
+                <tr>
+                    <td>@attribute.Name</td>
+                    <td>@attribute.Type.Namespace</td>
+                    <td>
+                        <ul>
+                        @foreach (var property in attribute.Properties) {
+                            <li>@property.Name = @property.Value</li>
+                        }
+                        </ul>
+                    </td>
+                </tr>
+                }
+            </table>
+        }
+
+        <hr />
+        @foreach (var inputModelType in Model.InputModels) {
+            <h2 id="@inputModelType.FullName">Input Model: @inputModelType.Name</h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                </tr>
+                @foreach (var property in inputModelType.Properties) {
+                <tr>
+                    <td>@property.Name</td>
+                    <td><code>@property.PropertyType</code></td>
+                </tr>    
+                }
+            </table>
+        }
+    </div>
+</body>
+</html>

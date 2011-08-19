@@ -1,0 +1,142 @@
+﻿@section Scripts {
+    <script src="../../Scripts/jquery-1.6.2.js" type="text/javascript"></script>
+    <script src="../../Scripts/jQuery.tmpl.js" type="text/javascript"></script>
+    <script src="../../Scripts/knockout-1.2.1.js" type="text/javascript"></script>
+    <script src="/json/comics?json"></script>
+    <script src="/json/publishers?json"></script>
+}
+
+<div id="comics">
+    <div data-bind="template: {name: 'comicTemplate', foreach: comics}">
+    </div>
+</div>
+
+<script id="comicTemplate" type="text/html">
+    <div class="comic">
+        <p>
+            <label>ID:</label> <span data-bind="text: Id"></span>
+        </p>
+        <p>
+            <label>Name:</label> 
+            <span data-bind="visible: !editing(), text: Title"></span>
+            <input type="text" data-bind="visible: editing, value: Title" />
+        </p>
+        <p>
+            <label>Publisher:</label> 
+            <select data-bind="enable: editing, 
+                options: publishers, 
+                optionsText: 'Name', 
+                optionsValue: 'Id',
+                value: PublisherId"></select>
+        </p>
+        <p>
+            <button data-bind="click: edit, visible: !editing()">Edit</button>
+            <button data-bind="click: remove">Delete</button>
+            <button data-bind="click: save, visible: editing">Save</button>
+        </p>
+    </div>
+</script>
+
+<form id="comicForm">
+    <fieldset>
+        <legend>New Comic</legend>
+        <label>Title</label>  <input type="text" data-bind="value: newComic().Title" />
+        <select data-bind="options: publishers, 
+                optionsText: 'Name', 
+                optionsValue: 'Id',
+                optionsCaption: 'Choose publisher...', 
+                value: newComic().PublisherId"></select>
+
+        <button data-bind="click: create">Create</button>
+    </fieldset>
+</form>
+
+<script>
+    $(function() {
+        function ComicEditorViewModel() {
+            var $this = this;
+
+            this.comics = ko.observableArray([]);
+
+            this.load = function() {
+                $mvc.Comics.List()
+                .success(function(data) {
+                    $this.comics($.map(data, function(item) { return new Comic(item, $this) }));
+                })
+                .error(function() {
+                    alert('error loading comics');
+                });
+
+                $mvc.Publishers.List()
+                .success(function(data) {
+                    $this.publishers(data);
+                })
+                .error(function() {
+                    alert('error loading publishers');
+                });
+            };
+
+            this.newComic = ko.observable(new Comic(null, $this));
+
+            this.create = function() {
+                if (ko.utils.arrayIndexOf(this.comics(), this.newComic()) < 0) {
+                    $mvc.Comics.Create($this.newComic().toJS())
+                    .success(function(data) {
+                        $this.comics.push(new Comic(data, $this));
+                        $this.newComic(new Comic(null, $this));
+                    })
+                    .error(function() { alert('error saving comic'); });
+                }
+            };
+
+            this.publishers = ko.observableArray([]);
+        };
+
+        function Comic(item, parent) {
+            $this = this;
+            this.parent = parent;
+
+            item = item || {};
+            this.Id = ko.observable(item.Id);
+            this.Title = ko.observable(item.Title);
+            this.Author = ko.observable(item.Author);
+            this.PublisherId = ko.observable(item.PublisherId);
+            this.publishers = parent.publishers;
+
+            this.edit = function() {
+                this.editing(true);
+            };
+
+            this.remove = function() {
+                var deleted = this;
+                $mvc.Comics.Delete(deleted.toJS())
+                .success(function() {
+                    deleted.parent.comics.remove(deleted);
+                })
+                .error(function() {
+                    alert('Could not delete comic with id: ' + deleted.Id());
+                });
+            };
+
+            this.editing = ko.observable(false);
+
+            this.save = function() {
+                $mvc.Comics.Edit(this.toJS())
+                .error(function() { alert('error while saving comic'); });
+                this.editing(false);
+            };
+
+            this.toJS = function() {
+                var js = ko.toJS(this);
+                delete js.Publishers;
+                delete js.parent;
+                delete js.editing;
+                return js;
+            };
+        };
+
+        var viewModel = new ComicEditorViewModel();
+        ko.applyBindings(viewModel);
+        viewModel.load();
+    });
+</script>

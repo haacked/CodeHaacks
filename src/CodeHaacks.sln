@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvcAjax", "MvcAjax", "{043FC8EA-D567-462D-8BB7-40A3494CDB15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcHaack.Ajax", "MvcHaack.Ajax\MvcHaack.Ajax.csproj", "{C90F24D5-1CE7-4F5D-A2AD-8F1892D2057F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcHaack.Ajax.DemoWeb", "MvcHaack.Ajax.DemoWeb\MvcHaack.Ajax.DemoWeb.csproj", "{1E7C6E9C-11B5-4F86-A16C-E7E30209A1EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcHaack.ControllerInspector", "MvcHaack.ControllerInspector\MvcHaack.ControllerInspector.csproj", "{13B06433-ACDC-4462-9288-707FF35019E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ControllerInspector", "ControllerInspector", "{ECB8DB57-6E41-476B-8A8A-5AB13B1C621A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcHaack.ControllerInspector.DemoWeb", "MvcHaack.ControllerInspector.DemoWeb\MvcHaack.ControllerInspector.DemoWeb.csproj", "{0EF39508-5FF4-4969-B888-265019FCA1A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C90F24D5-1CE7-4F5D-A2AD-8F1892D2057F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C90F24D5-1CE7-4F5D-A2AD-8F1892D2057F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C90F24D5-1CE7-4F5D-A2AD-8F1892D2057F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C90F24D5-1CE7-4F5D-A2AD-8F1892D2057F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E7C6E9C-11B5-4F86-A16C-E7E30209A1EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E7C6E9C-11B5-4F86-A16C-E7E30209A1EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E7C6E9C-11B5-4F86-A16C-E7E30209A1EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E7C6E9C-11B5-4F86-A16C-E7E30209A1EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13B06433-ACDC-4462-9288-707FF35019E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13B06433-ACDC-4462-9288-707FF35019E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13B06433-ACDC-4462-9288-707FF35019E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13B06433-ACDC-4462-9288-707FF35019E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EF39508-5FF4-4969-B888-265019FCA1A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF39508-5FF4-4969-B888-265019FCA1A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EF39508-5FF4-4969-B888-265019FCA1A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EF39508-5FF4-4969-B888-265019FCA1A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C90F24D5-1CE7-4F5D-A2AD-8F1892D2057F} = {043FC8EA-D567-462D-8BB7-40A3494CDB15}
+		{1E7C6E9C-11B5-4F86-A16C-E7E30209A1EC} = {043FC8EA-D567-462D-8BB7-40A3494CDB15}
+		{13B06433-ACDC-4462-9288-707FF35019E9} = {ECB8DB57-6E41-476B-8A8A-5AB13B1C621A}
+		{0EF39508-5FF4-4969-B888-265019FCA1A3} = {ECB8DB57-6E41-476B-8A8A-5AB13B1C621A}
+	EndGlobalSection
+EndGlobal
