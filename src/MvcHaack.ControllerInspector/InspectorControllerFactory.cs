@@ -25,6 +25,7 @@ namespace MvcHaack.ControllerInspector {
         private static bool IsInspectorRequest(HttpRequestBase httpRequest) {
             return httpRequest.IsLocal
                 && httpRequest.QueryString.Keys.Count > 0
+                && httpRequest.QueryString.GetValues(null) != null
                 && httpRequest.QueryString.GetValues(null).Contains("inspect");
         }
 
