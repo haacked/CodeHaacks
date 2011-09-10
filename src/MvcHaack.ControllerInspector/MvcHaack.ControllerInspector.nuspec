@@ -6,10 +6,13 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <projectUrl>https://github.com/Haacked/CodeHaacks</projectUrl>
     <iconUrl>http://haacked.com/images/Inspector-120x120.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
+    <releaseNotes>
+        1.0.0.1 Fixed a nullref issue when using qeury strings other than ?inspect
+    </releaseNotes>
     <tags>aspnetmvc controllerdescriptor controller</tags>
   </metadata>
 </package>
