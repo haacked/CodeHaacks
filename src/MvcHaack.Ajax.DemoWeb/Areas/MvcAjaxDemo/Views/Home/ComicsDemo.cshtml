@@ -35,7 +35,7 @@
 $(<span class="kwrd">function</span>() {
     $(<span class="str">'#loadButton'</span>).click(
         <span class="kwrd">function</span>() {
-            $mvc.ComicsDemo.List().success(<span class="kwrd">function</span>(data) {
+            $mvc.ComicsDemo.List().done(<span class="kwrd">function</span>(data) {
                 $.each(data, <span class="kwrd">function</span>() {
                     $(<span class="str">'#comics'</span>).append(<span class="str">'&lt;li&gt;'</span> + <span class="kwrd">this</span>.Title + <span class="str">'&lt;/li&gt;'</span>);
                 });

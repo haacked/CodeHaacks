@@ -60,7 +60,7 @@
 
             this.load = function() {
                 $mvc.Comics.List()
-                .success(function(data) {
+                .done(function(data) {
                     $this.comics($.map(data, function(item) { return new Comic(item, $this) }));
                 })
                 .error(function() {
@@ -68,7 +68,7 @@
                 });
 
                 $mvc.Publishers.List()
-                .success(function(data) {
+                .done(function(data) {
                     $this.publishers(data);
                 })
                 .error(function() {
@@ -81,7 +81,7 @@
             this.create = function() {
                 if (ko.utils.arrayIndexOf(this.comics(), this.newComic()) < 0) {
                     $mvc.Comics.Create($this.newComic().toJS())
-                    .success(function(data) {
+                    .done(function(data) {
                         $this.comics.push(new Comic(data, $this));
                         $this.newComic(new Comic(null, $this));
                     })
@@ -110,7 +110,7 @@
             this.remove = function() {
                 var deleted = this;
                 $mvc.Comics.Delete(deleted.toJS())
-                .success(function() {
+                .done(function() {
                     deleted.parent.comics.remove(deleted);
                 })
                 .error(function() {

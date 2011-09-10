@@ -15,7 +15,7 @@
 <script>
     $(function() {
         $('#post').click(function() {
-            $mvc.ComicsDemo.Save({ Title: 'Adventurers', Issue: 123 }).success(function(data) {
+            $mvc.ComicsDemo.Save({ Title: 'Adventurers', Issue: 123 }).done(function(data) {
                 alert(data.message + ' Comic: ' + data.comic.Title);
             });
         });
@@ -39,7 +39,7 @@
 <span class="kwrd">&lt;</span><span class="html">script</span><span class="kwrd">&gt;</span>
     $(<span class="kwrd">function</span>() {
         $(<span class="str">'#post'</span>).click(<span class="kwrd">function</span>() {
-            $mvc.ComicsDemo.Save({ Title: <span class="str">'Adventurers'</span>, Issue: 123 }).success(<span class="kwrd">function</span>(data) {
+            $mvc.ComicsDemo.Save({ Title: <span class="str">'Adventurers'</span>, Issue: 123 }).done(<span class="kwrd">function</span>(data) {
                 alert(data.message + <span class="str">' Comic: '</span> + data.comic.Title);
             });
         });
