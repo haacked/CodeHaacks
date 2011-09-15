@@ -65,10 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ControllerDetails.cshtml">
+    <None Include="ControllerDetails.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>ControllerDetails.generated.cs</LastGenOutput>
-    </Content>
+    </None>
     <None Include="MvcHaack.ControllerInspector.nuspec">
       <SubType>Designer</SubType>
     </None>
