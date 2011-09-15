@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace MvcHaack.ControllerInspector {
     internal class ControllerDetailer {
-        public string GetControllerDetails(ControllerDescriptor controllerDescriptor) {
+        public string GetControllerDetails(ControllerDescriptor controllerDescriptor, RequestContext requestContext) {
             var template = new ControllerDetails {
-                Model = GetControllerModel(controllerDescriptor)
+                Model = GetControllerModel(controllerDescriptor, requestContext)
             };
             return template.TransformText();
         }
 
-        private static object GetControllerModel(ControllerDescriptor controllerDescriptor) {
+        private static object GetControllerModel(ControllerDescriptor controllerDescriptor, RequestContext requestContext) {
             return new {
                 ControllerName = controllerDescriptor.ControllerName,
                 ControllerType = new {
@@ -27,6 +28,7 @@ namespace MvcHaack.ControllerInspector {
                               Name = action.ActionName,
                               Id = GetActionId(action),
                               Verbs = GetVerbs(action),
+                              Path = GetSamplePath(requestContext, action),
                               MethodInfo = (reflectedAction != null ? reflectedAction.MethodInfo : null),
                               ReturnType = (reflectedAction != null ? reflectedAction.MethodInfo.ReturnType : null),
                               Parameters = from parameter in action.GetParameters()
@@ -95,6 +97,55 @@ namespace MvcHaack.ControllerInspector {
                 actionName = actionName + ":" + String.Join(":", verbs);
             }
             return actionName;
+        }
+
+        private static string GetSamplePath(RequestContext requestContext, ActionDescriptor action) {
+            var urlHelper = new UrlHelper(requestContext);
+
+            var actionNameAttrib = action.GetCustomAttributes(inherit: true).OfType<ActionNameAttribute>().FirstOrDefault();
+
+            // This is tricky because some of the action parameters may not be meant to come from the route.
+            // e.g. they could come from a POST body.
+            // In that case, they may end up as bogus query string params on the path, which is a bit buggy
+            var routeValues = new RouteValueDictionary();
+            foreach (ParameterDescriptor param in action.GetParameters()) {
+                routeValues.Add(param.ParameterName, GetDefaultValue(param));
+            }
+
+            return urlHelper.Action(
+                actionNameAttrib != null ? actionNameAttrib.Name : action.ActionName,
+                action.ControllerDescriptor.ControllerName,
+                routeValues);
+        }
+
+        public static object GetDefaultValue(ParameterDescriptor param) {
+            // If it's a string, giving some value based on the param name
+            if (param.ParameterType == typeof(string)) {
+                return String.Format("Some{0}", param.ParameterName);
+            }
+
+            // If it's a number, pick some sample number.
+            switch (Type.GetTypeCode(param.ParameterType)) {
+                case TypeCode.Byte:
+                case TypeCode.SByte:
+                case TypeCode.UInt16:
+                case TypeCode.UInt32:
+                case TypeCode.UInt64:
+                case TypeCode.Int16:
+                case TypeCode.Int32:
+                case TypeCode.Int64:
+                case TypeCode.Decimal:
+                case TypeCode.Double:
+                case TypeCode.Single:
+                    return 7;
+            }
+
+            // For other value types, go with the default value
+            if (param.ParameterType.IsValueType) {
+                return Activator.CreateInstance(param.ParameterType);
+            }
+
+            return null;
         }
 
         private static IEnumerable<object> GetInputModels(ControllerDescriptor controller) {

@@ -375,7 +375,37 @@ WriteLiteral(" <span class=\"verbs\">");
 WriteLiteral("</span></h2>\r\n");
 
 
+            
+            #line 144 "..\..\ControllerDetails.cshtml"
 
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <h3>Sample Path</h3>\r\n");
+
+
+
+WriteLiteral("            <p><code>");
+
+
+            
+            #line 146 "..\..\ControllerDetails.cshtml"
+                Write(action.Path);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</code></p>\r\n");
+
+
+            
+            #line 147 "..\..\ControllerDetails.cshtml"
+
+
+            
+            #line default
+            #line hidden
 WriteLiteral("            <h3>Return Value</h3>\r\n");
 
 
@@ -384,7 +414,7 @@ WriteLiteral("            <p><code>");
 
 
             
-            #line 145 "..\..\ControllerDetails.cshtml"
+            #line 149 "..\..\ControllerDetails.cshtml"
                 Write(action.ReturnType);
 
             
@@ -394,7 +424,7 @@ WriteLiteral("</code></p>\r\n");
 
 
             
-            #line 146 "..\..\ControllerDetails.cshtml"
+            #line 150 "..\..\ControllerDetails.cshtml"
 
 
             
@@ -410,7 +440,7 @@ WriteLiteral("            <table>\r\n                <tr>\r\n                   
 
 
             
-            #line 154 "..\..\ControllerDetails.cshtml"
+            #line 158 "..\..\ControllerDetails.cshtml"
                  foreach (var parameter in action.Parameters) {
 
             
@@ -420,7 +450,7 @@ WriteLiteral("                <tr>\r\n                    <td>\r\n");
 
 
             
-            #line 157 "..\..\ControllerDetails.cshtml"
+            #line 161 "..\..\ControllerDetails.cshtml"
                          if (parameter.IsComplexType) {
 
             
@@ -430,7 +460,7 @@ WriteLiteral("                            <a href=\"#");
 
 
             
-            #line 158 "..\..\ControllerDetails.cshtml"
+            #line 162 "..\..\ControllerDetails.cshtml"
                                  Write(parameter.Type.FullName);
 
             
@@ -440,7 +470,7 @@ WriteLiteral("\">");
 
 
             
-            #line 158 "..\..\ControllerDetails.cshtml"
+            #line 162 "..\..\ControllerDetails.cshtml"
                                                            Write(parameter.Name);
 
             
@@ -450,7 +480,7 @@ WriteLiteral("</a>\r\n");
 
 
             
-            #line 159 "..\..\ControllerDetails.cshtml"
+            #line 163 "..\..\ControllerDetails.cshtml"
                         }
                         else {
                             
@@ -458,14 +488,14 @@ WriteLiteral("</a>\r\n");
             #line default
             #line hidden
             
-            #line 161 "..\..\ControllerDetails.cshtml"
+            #line 165 "..\..\ControllerDetails.cshtml"
                        Write(parameter.Name);
 
             
             #line default
             #line hidden
             
-            #line 161 "..\..\ControllerDetails.cshtml"
+            #line 165 "..\..\ControllerDetails.cshtml"
                                            
                         }
 
@@ -476,7 +506,7 @@ WriteLiteral("                    </td>\r\n                    <td>");
 
 
             
-            #line 164 "..\..\ControllerDetails.cshtml"
+            #line 168 "..\..\ControllerDetails.cshtml"
                    Write(parameter.Type);
 
             
@@ -486,7 +516,7 @@ WriteLiteral("</td>\r\n                    <td>");
 
 
             
-            #line 165 "..\..\ControllerDetails.cshtml"
+            #line 169 "..\..\ControllerDetails.cshtml"
                    Write(parameter.DefaultValue);
 
             
@@ -496,7 +526,7 @@ WriteLiteral("</td>\r\n                </tr>\r\n");
 
 
             
-            #line 167 "..\..\ControllerDetails.cshtml"
+            #line 171 "..\..\ControllerDetails.cshtml"
                 }
 
             
@@ -506,7 +536,7 @@ WriteLiteral("            </table>\r\n");
 
 
             
-            #line 169 "..\..\ControllerDetails.cshtml"
+            #line 173 "..\..\ControllerDetails.cshtml"
             
 
             
@@ -522,7 +552,7 @@ WriteLiteral("            <table>\r\n                <tr>\r\n                   
 
 
             
-            #line 177 "..\..\ControllerDetails.cshtml"
+            #line 181 "..\..\ControllerDetails.cshtml"
                  foreach (var attribute in action.Attributes) {
 
             
@@ -532,7 +562,7 @@ WriteLiteral("                <tr>\r\n                    <td>");
 
 
             
-            #line 179 "..\..\ControllerDetails.cshtml"
+            #line 183 "..\..\ControllerDetails.cshtml"
                    Write(attribute.Name);
 
             
@@ -542,7 +572,7 @@ WriteLiteral("</td>\r\n                    <td>");
 
 
             
-            #line 180 "..\..\ControllerDetails.cshtml"
+            #line 184 "..\..\ControllerDetails.cshtml"
                    Write(attribute.Type.Namespace);
 
             
@@ -552,7 +582,7 @@ WriteLiteral("</td>\r\n                    <td>\r\n                        <ul>\
 
 
             
-            #line 183 "..\..\ControllerDetails.cshtml"
+            #line 187 "..\..\ControllerDetails.cshtml"
                          foreach (var property in attribute.Properties) {
 
             
@@ -562,7 +592,7 @@ WriteLiteral("                            <li>");
 
 
             
-            #line 184 "..\..\ControllerDetails.cshtml"
+            #line 188 "..\..\ControllerDetails.cshtml"
                            Write(property.Name);
 
             
@@ -572,7 +602,7 @@ WriteLiteral(" = ");
 
 
             
-            #line 184 "..\..\ControllerDetails.cshtml"
+            #line 188 "..\..\ControllerDetails.cshtml"
                                             Write(property.Value);
 
             
@@ -582,7 +612,7 @@ WriteLiteral("</li>\r\n");
 
 
             
-            #line 185 "..\..\ControllerDetails.cshtml"
+            #line 189 "..\..\ControllerDetails.cshtml"
                         }
 
             
@@ -593,7 +623,7 @@ WriteLiteral("                        </ul>\r\n                    </td>\r\n    
 
 
             
-            #line 189 "..\..\ControllerDetails.cshtml"
+            #line 193 "..\..\ControllerDetails.cshtml"
                 }
 
             
@@ -603,7 +633,7 @@ WriteLiteral("            </table>\r\n");
 
 
             
-            #line 191 "..\..\ControllerDetails.cshtml"
+            #line 195 "..\..\ControllerDetails.cshtml"
         }
 
             
@@ -613,7 +643,7 @@ WriteLiteral("\r\n        <hr />\r\n");
 
 
             
-            #line 194 "..\..\ControllerDetails.cshtml"
+            #line 198 "..\..\ControllerDetails.cshtml"
          foreach (var inputModelType in Model.InputModels) {
 
             
@@ -623,7 +653,7 @@ WriteLiteral("            <h2 id=\"");
 
 
             
-            #line 195 "..\..\ControllerDetails.cshtml"
+            #line 199 "..\..\ControllerDetails.cshtml"
                Write(inputModelType.FullName);
 
             
@@ -633,7 +663,7 @@ WriteLiteral("\">Input Model: ");
 
 
             
-            #line 195 "..\..\ControllerDetails.cshtml"
+            #line 199 "..\..\ControllerDetails.cshtml"
                                                       Write(inputModelType.Name);
 
             
@@ -648,7 +678,7 @@ WriteLiteral("            <table>\r\n                <tr>\r\n                   
 
 
             
-            #line 201 "..\..\ControllerDetails.cshtml"
+            #line 205 "..\..\ControllerDetails.cshtml"
                  foreach (var property in inputModelType.Properties) {
 
             
@@ -658,7 +688,7 @@ WriteLiteral("                <tr>\r\n                    <td>");
 
 
             
-            #line 203 "..\..\ControllerDetails.cshtml"
+            #line 207 "..\..\ControllerDetails.cshtml"
                    Write(property.Name);
 
             
@@ -668,7 +698,7 @@ WriteLiteral("</td>\r\n                    <td><code>");
 
 
             
-            #line 204 "..\..\ControllerDetails.cshtml"
+            #line 208 "..\..\ControllerDetails.cshtml"
                          Write(property.PropertyType);
 
             
@@ -678,7 +708,7 @@ WriteLiteral("</code></td>\r\n                </tr>    \r\n");
 
 
             
-            #line 206 "..\..\ControllerDetails.cshtml"
+            #line 210 "..\..\ControllerDetails.cshtml"
                 }
 
             
@@ -688,7 +718,7 @@ WriteLiteral("            </table>\r\n");
 
 
             
-            #line 208 "..\..\ControllerDetails.cshtml"
+            #line 212 "..\..\ControllerDetails.cshtml"
         }
 
             
