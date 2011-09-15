@@ -114,7 +114,7 @@ namespace MvcHaack.ControllerInspector {
 
             return urlHelper.Action(
                 actionNameAttrib != null ? actionNameAttrib.Name : action.ActionName,
-                action.ControllerDescriptor.ControllerName,
+                action.ControllerDescriptor.ControllerName.ToLowerInvariant(),
                 routeValues);
         }
 
