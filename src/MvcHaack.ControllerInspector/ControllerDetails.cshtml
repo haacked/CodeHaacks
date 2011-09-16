@@ -141,6 +141,10 @@
         
         @foreach (var action in Model.Actions) {
             <h2 id="@action.Id">@action.Name <span class="verbs">@String.Join(", ", action.Verbs)</span></h2>
+
+            <h3>Sample Path</h3>
+            <p><code>@action.Path</code></p>
+
             <h3>Return Value</h3>
             <p><code>@action.ReturnType</code></p>
 

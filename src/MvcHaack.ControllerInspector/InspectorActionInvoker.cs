@@ -13,7 +13,7 @@ namespace MvcHaack.ControllerInspector {
             var controllerActionInvoker = _invoker as ControllerActionInvoker;
             if (controllerActionInvoker != null) {
                 var detailer = new ControllerDetailer();
-                httpContext.Response.Write(detailer.GetControllerDetails(GetControllerDescriptor(controllerContext)));
+                httpContext.Response.Write(detailer.GetControllerDetails(GetControllerDescriptor(controllerContext), controllerContext.RequestContext));
                 return true;
             }
 
