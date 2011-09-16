@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RazorGenerator.Templating">
+      <HintPath>..\packages\RazorGenerator.Templating.1.2.1\lib\net40\RazorGenerator.Templating.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -62,10 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ControllerDetails.cshtml">
+    <None Include="ControllerDetails.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>ControllerDetails.generated.cs</LastGenOutput>
-    </Content>
+    </None>
     <None Include="MvcHaack.ControllerInspector.nuspec">
       <SubType>Designer</SubType>
     </None>

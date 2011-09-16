@@ -23,6 +23,16 @@ namespace MvcHaack.ControllerInspector.DemoWeb.Controllers {
         public string List(SomeModel model) {
             return "Test";
         }
+
+        [ActionName("Bar")]
+        public ActionResult MethodWithNumericParam(short id) {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult MethodWithNonRouteParam(string hello) {
+            return View();
+        }
     }
 
     public class SomeModel {
