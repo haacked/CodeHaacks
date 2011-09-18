@@ -13,6 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ControllerInspector", "Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcHaack.ControllerInspector.DemoWeb", "MvcHaack.ControllerInspector.DemoWeb\MvcHaack.ControllerInspector.DemoWeb.csproj", "{0EF39508-5FF4-4969-B888-265019FCA1A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcHaack.ViewMobilizer", "MvcHaack.ViewMobilizer\MvcHaack.ViewMobilizer.csproj", "{E157EB2F-762F-4EFF-8E05-6ABF421BF136}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewMobilizerTests", "ViewMobilizerTests\ViewMobilizerTests.csproj", "{148F2E13-3F1E-467D-84A2-F2020C19BD02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Recipes", "Recipes", "{4677899C-5C68-4A68-BA1C-4B94ABA4317B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +41,14 @@ Global
 		{0EF39508-5FF4-4969-B888-265019FCA1A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EF39508-5FF4-4969-B888-265019FCA1A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EF39508-5FF4-4969-B888-265019FCA1A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E157EB2F-762F-4EFF-8E05-6ABF421BF136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E157EB2F-762F-4EFF-8E05-6ABF421BF136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E157EB2F-762F-4EFF-8E05-6ABF421BF136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E157EB2F-762F-4EFF-8E05-6ABF421BF136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{148F2E13-3F1E-467D-84A2-F2020C19BD02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{148F2E13-3F1E-467D-84A2-F2020C19BD02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{148F2E13-3F1E-467D-84A2-F2020C19BD02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{148F2E13-3F1E-467D-84A2-F2020C19BD02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +58,7 @@ Global
 		{1E7C6E9C-11B5-4F86-A16C-E7E30209A1EC} = {043FC8EA-D567-462D-8BB7-40A3494CDB15}
 		{13B06433-ACDC-4462-9288-707FF35019E9} = {ECB8DB57-6E41-476B-8A8A-5AB13B1C621A}
 		{0EF39508-5FF4-4969-B888-265019FCA1A3} = {ECB8DB57-6E41-476B-8A8A-5AB13B1C621A}
+		{148F2E13-3F1E-467D-84A2-F2020C19BD02} = {4677899C-5C68-4A68-BA1C-4B94ABA4317B}
+		{E157EB2F-762F-4EFF-8E05-6ABF421BF136} = {4677899C-5C68-4A68-BA1C-4B94ABA4317B}
 	EndGlobalSection
 EndGlobal
