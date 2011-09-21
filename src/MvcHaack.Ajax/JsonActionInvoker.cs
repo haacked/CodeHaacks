@@ -31,6 +31,10 @@ if (typeof $mvc === 'undefined') {{
     $mvc = {{}};
 }}
 $mvc.{0} = [];
+
+if (!window.JSON)
+    throw 'JsonActionInvoker: No JSON parser found. Please ensure json2.js is referenced before the script tag pointing to the controller to support clients without native JSON parsing support, e.g. IE 8 or less.';
+
 $.each({1}, function(action) {{
     var action = this;
     $mvc.{0}[this] = function(obj) {{
@@ -39,7 +43,7 @@ $.each({1}, function(action) {{
             dataType: 'json',
             type: 'POST',
             headers: {{'x-mvc-action': action}},
-            data: JSON.stringify(obj),
+            data: window.JSON.stringify(obj),
             contentType: 'application/json; charset=utf-8',
             url: '{2}&action=' + action
         }});
