@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>@ViewBag.Message</h2>
+<p>
+    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+</p>
+
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url: '/home/about',
+            cache: false,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            statusCode: {
+                200: function (data) {
+                    alert('200: Authenticated');
+                },
+                401: function (data) {
+                    alert('401: Unauthenticated');
+                }
+            }
+        });
+    });
+</script>

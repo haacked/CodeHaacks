@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>$id$</id>
@@ -10,9 +10,6 @@
         <iconUrl>http://haacked.com/images/Inspector-120x120.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>$description$</description>
-        <releaseNotes>
-            1.0.1 alerts users when using in IE 8 or less without the json2 library referenced.
-        </releaseNotes>
-        <tags>aspnetmvc asp.net aspnet asp.net-mvc controllerdescriptor controller</tags>
+        <tags>aspnetmvc asp.net aspnet asp.net-mvc membership formsauth forms-authentication webapi</tags>
     </metadata>
 </package>
