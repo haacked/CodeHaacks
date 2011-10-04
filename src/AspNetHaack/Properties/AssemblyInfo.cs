@@ -5,13 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AspNetHaack")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A collection of extensions to core ASP.NET including a way to suppress login page redirects caused by the forms authentication module")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Phil Haack")]
 [assembly: AssemblyProduct("AspNetHaack")]
 [assembly: AssemblyCopyright("Copyright © Phil Haack 2011")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

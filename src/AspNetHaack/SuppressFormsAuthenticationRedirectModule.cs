@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Web;
-using AspNetHaack;
-using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
-[assembly: PreApplicationStartMethod(typeof(SuppressFormsAuthenticationRedirectModule), "Register")]
 namespace AspNetHaack {
     public class SuppressFormsAuthenticationRedirectModule : IHttpModule {
         private static readonly object SuppressAuthenticationKey = new Object();
@@ -44,10 +41,6 @@ namespace AspNetHaack {
         }
 
         public void Dispose() {
-        }
-
-        public static void Register() {
-            DynamicModuleUtility.RegisterModule(typeof(SuppressFormsAuthenticationRedirectModule));
         }
     }
 }

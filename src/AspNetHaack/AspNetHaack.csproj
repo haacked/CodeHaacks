@@ -48,8 +48,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticationRedirectFixupModule.cs" />
+    <Content Include="App_Start\FormsAuthenticationConfig.cs.pp" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SuppressFormsAuthenticationRedirectModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AspNetHaack.nuspec" />
