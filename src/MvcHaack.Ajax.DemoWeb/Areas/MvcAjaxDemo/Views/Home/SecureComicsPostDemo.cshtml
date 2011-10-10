@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "ComicsDemoPostback";
+}
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/jquery-1.6.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/json/comicsdemo?json")"></script>
+    <script src="@Url.Content("~/Scripts/comicsdemo.js")"></script>
+}
+
+<h2>Simple Comics Post Demo With AntiForgery Protection</h2>
+
+<button id="post">Click to post a comic to the server</button>
+
+<script>
+    $(function () {
+        $('#post').click(function () {
+            $mvc.ComicsDemo.SaveSecure({ Title: 'Adventurers', Issue: 123 }, true /*includeAntiForgeryToken*/).done(function (data) {
+                alert(data.message + ' Comic: ' + data.comic.Title);
+            }).fail(function () { alert('Failed!'); });
+        });
+    });
+</script>
+
+<hr />
+
+@Html.AntiForgeryToken()
+
+<fieldset class="code">
+    <legend>comicspostdemo.html</legend>
+
+<pre class="csharpcode">
+<span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">src</span><span class="kwrd">="../../Scripts/jquery-1.6.2.js"</span> <span class="attr">type</span><span class="kwrd">="text/javascript"</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">src</span><span class="kwrd">="/json/comicsdemo?json"</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">src</span><span class="kwrd">="/Scripts/comicsdemo.js"</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span>
+
+<span class="kwrd">&lt;</span><span class="html">h2</span><span class="kwrd">&gt;</span>Simple Comics Post Demo<span class="kwrd">&lt;/</span><span class="html">h2</span><span class="kwrd">&gt;</span>
+
+<span class="kwrd">&lt;</span><span class="html">button</span> <span class="attr">id</span><span class="kwrd">="post"</span><span class="kwrd">&gt;</span>Click to post a comic to the server<span class="kwrd">&lt;/</span><span class="html">button</span><span class="kwrd">&gt;</span>
+
+<span class="asp">@@</span>Html.AntiForgeryToken()
+
+<span class="kwrd">&lt;</span><span class="html">script</span><span class="kwrd">&gt;</span>
+    $(<span class="kwrd">function</span>() {
+        $(<span class="str">'#post'</span>).click(<span class="kwrd">function</span>() {
+            $mvc.ComicsDemo.SaveSecure({ Title: <span class="str">'Adventurers'</span>, Issue: 123 }).done(<span class="kwrd">function</span>(data) {
+                alert(data.message + <span class="str">' Comic: '</span> + data.comic.Title);
+            });
+        });
+    });
+<span class="kwrd">&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span></pre>
+
+</fieldset>

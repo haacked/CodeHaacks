@@ -14,6 +14,10 @@ namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers {
             return View();
         }
 
+        public ActionResult SecureComicsPostDemo() {
+            return View();
+        }
+
         public ActionResult KnockoutDemo() {
             return View();
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Web.Mvc;
 using MvcHaack.Ajax.Sample.Models;
 
 namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers {
@@ -15,5 +16,9 @@ namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers {
             return new { message = "Saved!", comic = book };
         }
 
+        [ValidateJsonAntiForgeryToken]
+        public object SaveSecure(ComicBook book) {
+            return new { message = "Saved!", comic = book };
+        }
     }
 }

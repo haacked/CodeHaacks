@@ -37,12 +37,18 @@ if (!window.JSON)
 
 $.each({1}, function(action) {{
     var action = this;
-    $mvc.{0}[this] = function(obj) {{
+    
+    $mvc.{0}[this] = function(obj, includeAntiForgeryToken) {{
+        var headers = {{'x-mvc-action': action}};
+        if (includeAntiForgeryToken) {{
+            headers['__RequestVerificationToken'] = $('input[name=""__RequestVerificationToken""]').val();
+        }}
+
         return $.ajax({{
             cache: false,
             dataType: 'json',
             type: 'POST',
-            headers: {{'x-mvc-action': action}},
+            headers: headers,
             data: window.JSON.stringify(obj),
             contentType: 'application/json; charset=utf-8',
             url: '{2}&action=' + action
