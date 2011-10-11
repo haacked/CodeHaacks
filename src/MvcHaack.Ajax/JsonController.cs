@@ -11,7 +11,7 @@ namespace MvcHaack.Ajax {
         protected override void ExecuteCore() {
             var queryString = HttpContext.Request.QueryString;
             if (queryString.Keys.Count > 0 && String.Equals(queryString.GetValues(0).First(), "json", StringComparison.OrdinalIgnoreCase)) {
-                ActionInvoker.InvokeAction(base.ControllerContext, "Internal::Proxy");
+                ActionInvoker.InvokeAction(ControllerContext, "Internal::Proxy");
                 return;
             }
 
@@ -27,7 +27,7 @@ namespace MvcHaack.Ajax {
                 return;
             }
 
-            ActionInvoker.InvokeAction(base.ControllerContext, "Internal::ProxyDefinition");
+            ActionInvoker.InvokeAction(ControllerContext, "Internal::ProxyDefinition");
         }
     }
 }

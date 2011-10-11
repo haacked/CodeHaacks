@@ -56,7 +56,7 @@ $.each({1}, function(action) {{
     }};
 }});
 ";
-            string serviceUrl = controllerContext.HttpContext.Request.RawUrl.ToString();
+            string serviceUrl = controllerContext.HttpContext.Request.RawUrl;
             int proxyIndex = serviceUrl.IndexOf("?json", StringComparison.OrdinalIgnoreCase);
             if (proxyIndex > -1) {
                 serviceUrl = serviceUrl.Substring(0, proxyIndex) + "?invoke";
@@ -74,12 +74,10 @@ $.each({1}, function(action) {{
 
         private bool RenderJavaScriptProxyDescription(ControllerContext controllerContext) {
             var controllerDescriptor = GetControllerDescriptor(controllerContext);
-            var actions = controllerDescriptor.GetCanonicalActions();
-            var actionNames = from action in actions select action.ActionName;
 
             var response = controllerContext.HttpContext.Response;
 
-            string html = @"<!DOCTYPE html>
+            const string html = @"<!DOCTYPE html>
 <html>
 <head>
     <title>Controller: {0} JavaScript Proxy Definition</title>
@@ -114,7 +112,7 @@ $.each({1}, function(action) {{
             string actionRows = "";
 
             foreach (var action in controllerDescriptor.GetCanonicalActions()) {
-                string row = @"<tr>
+                const string row = @"<tr>
 <td>{0}</td>
 <td><code>$mvc.{1}.{0}({2})</code></td>
 </tr>";

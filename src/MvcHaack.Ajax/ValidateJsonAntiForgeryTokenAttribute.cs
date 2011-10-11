@@ -23,7 +23,7 @@ namespace MvcHaack.Ajax {
         }
 
         private class JsonAntiForgeryHttpContextWrapper : HttpContextWrapper {
-            HttpRequestBase _request;
+            readonly HttpRequestBase _request;
             public JsonAntiForgeryHttpContextWrapper(HttpContext httpContext)
                 : base(httpContext) {
                 _request = new JsonAntiForgeryHttpRequestWrapper(httpContext.Request);
@@ -37,7 +37,7 @@ namespace MvcHaack.Ajax {
         }
 
         private class JsonAntiForgeryHttpRequestWrapper : HttpRequestWrapper {
-            NameValueCollection _form;
+            readonly NameValueCollection _form;
 
             public JsonAntiForgeryHttpRequestWrapper(HttpRequest request)
                 : base(request) {
