@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
-using System.Web;
+using System.Threading;
 using Microsoft.ApplicationServer.Http.Dispatcher;
 
 namespace WebApiHaack
@@ -20,7 +20,7 @@ namespace WebApiHaack
 
         protected override HttpRequestMessage OnHandle(HttpRequestMessage input)
         {
-            IPrincipal user = HttpContext.Current.User;
+            IPrincipal user = Thread.CurrentPrincipal;
             if (!user.Identity.IsAuthenticated)
             {
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
