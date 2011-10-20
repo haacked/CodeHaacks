@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA54304A-8940-43C4-AF3E-6E3696CF355F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApiHaack.DemoWeb</RootNamespace>
+    <AssemblyName>WebApiHaack.DemoWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityDataModel">
+      <HintPath>..\packages\WebApi.OData.0.5.0\lib\40-Full\EntityDataModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationServer.Http">
+      <HintPath>..\packages\WebApi.0.5.0\lib\40-Full\Microsoft.ApplicationServer.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationServer.HttpEnhancements">
+      <HintPath>..\packages\WebApi.Enhancements.0.5.0\lib\40-Full\Microsoft.ApplicationServer.HttpEnhancements.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Spatial">
+      <HintPath>..\packages\WebApi.OData.0.5.0\lib\40-Full\Microsoft.Data.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Json">
+      <HintPath>..\packages\JsonValue.0.5.0\lib\40\Microsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http">
+      <HintPath>..\packages\HttpClient.0.5.0\lib\40\Microsoft.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Formatting">
+      <HintPath>..\packages\HttpClient.0.5.0\lib\40\Microsoft.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Formatting.OData">
+      <HintPath>..\packages\WebApi.OData.0.5.0\lib\40-Full\Microsoft.Net.Http.Formatting.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Runtime.Serialization.Internal">
+      <HintPath>..\packages\WebApi.0.5.0\lib\40-Full\Microsoft.Runtime.Serialization.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Server.Common">
+      <HintPath>..\packages\WebApi.0.5.0\lib\40-Full\Microsoft.Server.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ServiceModel.Internal">
+      <HintPath>..\packages\WebApi.0.5.0\lib\40-Full\Microsoft.ServiceModel.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.OData">
+      <HintPath>..\packages\WebApi.OData.0.5.0\lib\40-Full\System.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="default.htm" />
+    <Content Include="Global.asax" />
+    <Content Include="logon.htm" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppStart\CommentsConfiguration.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Api\CommentsApi.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApiHaack\WebApiHaack.csproj">
+      <Project>{BF86347D-DF92-42A3-8988-A47854BAD9EA}</Project>
+      <Name>WebApiHaack</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>11561</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
