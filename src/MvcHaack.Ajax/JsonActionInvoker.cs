@@ -81,7 +81,7 @@ $.each({1}, function(action) {{
 <html>
 <head>
     <title>Controller: {0} JavaScript Proxy Definition</title>
-    <style
+    <style>
         table {{
             font-family: calibri;
             font-size: 1em;
