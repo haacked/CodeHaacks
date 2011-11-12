@@ -15,7 +15,7 @@
 <script>
     $(function () {
         $('#post').click(function () {
-            $mvc.ComicsDemo.SaveSecure({ Title: 'Adventurers', Issue: 123 }, true /*includeAntiForgeryToken*/).done(function (data) {
+            $mvc.ComicsDemo.SaveSecure({ Title: 'Adventurers', IssueNumber: 123 }, true /*includeAntiForgeryToken*/).done(function (data) {
                 alert(data.message + ' Comic: ' + data.comic.Title);
             }).fail(function () { alert('Failed!'); });
         });
