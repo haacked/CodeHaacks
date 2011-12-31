@@ -26,3 +26,4 @@ obj/
 *.sig
 _ReSharper*/
 *.orig
+src/packages/
