@@ -3,15 +3,19 @@ using Moq;
 using MvcHaack.ViewMobilizer;
 using Xunit;
 
-namespace ViewMobilizerTests {
-    public class ViewMobilizerModelTests {
-        public class TheConstructor {
+namespace ViewMobilizerTests
+{
+    public class ViewMobilizerModelTests
+    {
+        public class TheConstructor
+        {
             [Fact]
-            public void ShowsViewsWithNoMobileEquivalent() {
+            public void ShowsViewsWithNoMobileEquivalent()
+            {
                 var file = new Mock<ProjectFile>();
                 file.Setup(f => f.RelativePath).Returns("Views/Foo.cshtml");
                 var files = new[] { file.Object };
-                var folder = new Mock<ProjectFolder>() { CallBase = true };
+                var folder = new Mock<ProjectFolder> { CallBase = true };
                 folder.Setup(f => f.Files).Returns(files);
                 folder.Setup(f => f.Folders).Returns(new ProjectFolder[] { });
 
@@ -22,7 +26,8 @@ namespace ViewMobilizerTests {
             }
 
             [Fact]
-            public void FiltersOutViewsWithMobileEquivalent() {
+            public void FiltersOutViewsWithMobileEquivalent()
+            {
                 var file = new Mock<ProjectFile>();
                 file.Setup(f => f.RelativePath).Returns("Views/Foo.cshtml");
                 var mobileFile = new Mock<ProjectFile>();
@@ -30,7 +35,7 @@ namespace ViewMobilizerTests {
                 var anotherFile = new Mock<ProjectFile>();
                 anotherFile.Setup(f => f.RelativePath).Returns("Views/Bar.cshtml");
                 var files = new[] { file.Object, mobileFile.Object, anotherFile.Object };
-                var folder = new Mock<ProjectFolder>() { CallBase = true };
+                var folder = new Mock<ProjectFolder> { CallBase = true };
                 folder.Setup(f => f.Files).Returns(files);
                 folder.Setup(f => f.Folders).Returns(new ProjectFolder[] { });
 
@@ -41,7 +46,8 @@ namespace ViewMobilizerTests {
             }
 
             [Fact]
-            public void FiltersOutViewsWithSuffixedEquivalent() {
+            public void FiltersOutViewsWithSuffixedEquivalent()
+            {
                 var file = new Mock<ProjectFile>();
                 file.Setup(f => f.RelativePath).Returns("Views/Foo.cshtml");
                 var mobileFile = new Mock<ProjectFile>();
@@ -49,7 +55,7 @@ namespace ViewMobilizerTests {
                 var anotherFile = new Mock<ProjectFile>();
                 anotherFile.Setup(f => f.RelativePath).Returns("Views/Bar.cshtml");
                 var files = new[] { file.Object, anotherFile.Object, mobileFile.Object };
-                var folder = new Mock<ProjectFolder>() { CallBase = true };
+                var folder = new Mock<ProjectFolder> { CallBase = true };
                 folder.Setup(f => f.Files).Returns(files);
                 folder.Setup(f => f.Folders).Returns(new ProjectFolder[] { });
 
@@ -60,7 +66,8 @@ namespace ViewMobilizerTests {
             }
 
             [Fact]
-            public void FiltersOutViewsWithAlphaPreviousSuffixedEquivalent() {
+            public void FiltersOutViewsWithAlphaPreviousSuffixedEquivalent()
+            {
                 var file = new Mock<ProjectFile>();
                 file.Setup(f => f.RelativePath).Returns("Views/Foo.cshtml");
                 var mobileFile = new Mock<ProjectFile>();
@@ -68,7 +75,7 @@ namespace ViewMobilizerTests {
                 var anotherFile = new Mock<ProjectFile>();
                 anotherFile.Setup(f => f.RelativePath).Returns("Views/Bar.cshtml");
                 var files = new[] { mobileFile.Object, file.Object, anotherFile.Object };
-                var folder = new Mock<ProjectFolder>() { CallBase = true };
+                var folder = new Mock<ProjectFolder> { CallBase = true };
                 folder.Setup(f => f.Files).Returns(files);
                 folder.Setup(f => f.Folders).Returns(new ProjectFolder[] { });
 

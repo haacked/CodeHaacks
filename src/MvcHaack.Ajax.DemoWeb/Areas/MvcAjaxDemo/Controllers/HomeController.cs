@@ -1,24 +1,31 @@
 ﻿using System.Web.Mvc;
 
-namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers {
-    public class HomeController : Controller {
-        public ActionResult Index() {
+namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
             return View();
         }
 
-        public ActionResult ComicsDemo() {
+        public ActionResult ComicsDemo()
+        {
             return View();
         }
 
-        public ActionResult ComicsPostDemo() {
+        public ActionResult ComicsPostDemo()
+        {
             return View();
         }
 
-        public ActionResult SecureComicsPostDemo() {
+        public ActionResult SecureComicsPostDemo()
+        {
             return View();
         }
 
-        public ActionResult KnockoutDemo() {
+        public ActionResult KnockoutDemo()
+        {
             return View();
         }
     }

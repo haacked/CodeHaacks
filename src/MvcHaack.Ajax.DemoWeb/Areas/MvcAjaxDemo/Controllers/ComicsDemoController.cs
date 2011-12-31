@@ -1,10 +1,12 @@
 ﻿using System.Collections;
-using System.Web.Mvc;
 using MvcHaack.Ajax.Sample.Models;
 
-namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers {
-    public class ComicsDemoController : JsonController {
-        public IEnumerable List() {
+namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers
+{
+    public class ComicsDemoController : JsonController
+    {
+        public IEnumerable List()
+        {
             return new[] {
               new {Id = 1, Title = "Groo"},
               new {Id = 1, Title = "Batman"},
@@ -12,12 +14,14 @@ namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers {
             };
         }
 
-        public object Save(ComicBook book) {
+        public object Save(ComicBook book)
+        {
             return new { message = "Saved!", comic = book };
         }
 
         [ValidateJsonAntiForgeryToken]
-        public object SaveSecure(ComicBook book) {
+        public object SaveSecure(ComicBook book)
+        {
             return new { message = "Saved!", comic = book };
         }
     }

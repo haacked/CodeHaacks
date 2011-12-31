@@ -10,7 +10,7 @@ namespace WebApiHaack
 {
     public class AuthOperationHandler : HttpOperationHandler<HttpRequestMessage, HttpRequestMessage>
     {
-        RequireAuthorizationAttribute _authorizeAttribute;
+        readonly RequireAuthorizationAttribute _authorizeAttribute;
 
         public AuthOperationHandler(RequireAuthorizationAttribute authorizeAttribute)
             : base("response")
@@ -32,7 +32,7 @@ namespace WebApiHaack
             }
 
             var roles = _authorizeAttribute.Roles.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-            if (roles.Any(role => user.IsInRole(role)))
+            if (roles.Any(user.IsInRole))
             {
                 return input;
             }

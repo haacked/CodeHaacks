@@ -3,23 +3,30 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
-namespace MvcHaack.Ajax {
-    public class JsonActionInvoker : ControllerActionInvoker {
-        protected override ActionResult CreateActionResult(ControllerContext controllerContext, ActionDescriptor actionDescriptor, object actionReturnValue) {
+namespace MvcHaack.Ajax
+{
+    public class JsonActionInvoker : ControllerActionInvoker
+    {
+        protected override ActionResult CreateActionResult(ControllerContext controllerContext, ActionDescriptor actionDescriptor, object actionReturnValue)
+        {
             return new JsonResult { Data = actionReturnValue, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        public override bool InvokeAction(ControllerContext controllerContext, string actionName) {
-            if (actionName == "Internal::Proxy") {
+        public override bool InvokeAction(ControllerContext controllerContext, string actionName)
+        {
+            if (actionName == "Internal::Proxy")
+            {
                 return RenderJavaScriptProxyScript(controllerContext);
             }
-            if (actionName == "Internal::ProxyDefinition") {
+            if (actionName == "Internal::ProxyDefinition")
+            {
                 return RenderJavaScriptProxyDescription(controllerContext);
             }
             return base.InvokeAction(controllerContext, actionName);
         }
 
-        private bool RenderJavaScriptProxyScript(ControllerContext controllerContext) {
+        private bool RenderJavaScriptProxyScript(ControllerContext controllerContext)
+        {
             var controllerDescriptor = GetControllerDescriptor(controllerContext);
             var actions = controllerDescriptor.GetCanonicalActions();
             var actionNames = from action in actions select action.ActionName;
@@ -58,7 +65,8 @@ $.each({1}, function(action) {{
 ";
             string serviceUrl = controllerContext.HttpContext.Request.RawUrl;
             int proxyIndex = serviceUrl.IndexOf("?json", StringComparison.OrdinalIgnoreCase);
-            if (proxyIndex > -1) {
+            if (proxyIndex > -1)
+            {
                 serviceUrl = serviceUrl.Substring(0, proxyIndex) + "?invoke";
             }
 
@@ -72,7 +80,8 @@ $.each({1}, function(action) {{
             return true;
         }
 
-        private bool RenderJavaScriptProxyDescription(ControllerContext controllerContext) {
+        private bool RenderJavaScriptProxyDescription(ControllerContext controllerContext)
+        {
             var controllerDescriptor = GetControllerDescriptor(controllerContext);
 
             var response = controllerContext.HttpContext.Response;
@@ -111,7 +120,8 @@ $.each({1}, function(action) {{
 </html>";
             string actionRows = "";
 
-            foreach (var action in controllerDescriptor.GetCanonicalActions()) {
+            foreach (var action in controllerDescriptor.GetCanonicalActions())
+            {
                 const string row = @"<tr>
 <td>{0}</td>
 <td><code>$mvc.{1}.{0}({2})</code></td>

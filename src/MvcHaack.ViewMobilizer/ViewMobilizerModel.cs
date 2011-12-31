@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.Web.Mvc.Extensibility;
 
-namespace MvcHaack.ViewMobilizer {
-    public class ViewMobilizerModel {
+namespace MvcHaack.ViewMobilizer
+{
+    public class ViewMobilizerModel
+    {
         public ViewMobilizerModel(ProjectFolder folder)
-            : this(folder, "mobile") {
+            : this(folder, "mobile")
+        {
         }
 
-        public ViewMobilizerModel(ProjectFolder folder, string suffix) {
+        public ViewMobilizerModel(ProjectFolder folder, string suffix)
+        {
             Folder = folder;
             Populate(suffix);
         }
@@ -19,7 +24,8 @@ namespace MvcHaack.ViewMobilizer {
 
         public string DeviceSpecificExtension { get; private set; }
 
-        public void Populate(string suffix) {
+        public void Populate(string suffix)
+        {
             Suffix = suffix;
             DeviceSpecificExtension = String.Format(".{0}.cshtml", Suffix);
             var views = new Dictionary<string, ProjectFile>(StringComparer.OrdinalIgnoreCase);
@@ -30,38 +36,39 @@ namespace MvcHaack.ViewMobilizer {
 
 
 
-        private void FilterViews(ProjectFolder folder, Dictionary<string, ProjectFile> views) {
+        private void FilterViews(ProjectFolder folder, Dictionary<string, ProjectFile> views)
+        {
             // Collect
-            Traverse(folder, file => {
-                views.Add(file.RelativePath, file);
-            });
+            Traverse(folder, file => views.Add(file.RelativePath, file));
 
             // Filter
-            Traverse(folder, file => {
-                RemoveDeviceSpecificWithCorrespondingDesktop(file, views);
-            });
+            Traverse(folder, file => RemoveDeviceSpecificWithCorrespondingDesktop(file, views));
         }
 
-        private void Traverse(ProjectFolder folder, Action<ProjectFile> action) {
-            foreach (var file in folder.Files) {
-                if (file.RelativePath.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase)) {
-                    action(file);
-                }
+        private void Traverse(ProjectFolder folder, Action<ProjectFile> action)
+        {
+            foreach (var file in folder.Files.Where(file => file.RelativePath.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase)))
+            {
+                action(file);
             }
-            foreach (var subfolder in folder.Folders) {
+            foreach (var subfolder in folder.Folders)
+            {
                 Traverse(subfolder, action);
             }
         }
 
-        private void RemoveDeviceSpecificWithCorrespondingDesktop(ProjectFile file, Dictionary<string, ProjectFile> views) {
+        private void RemoveDeviceSpecificWithCorrespondingDesktop(ProjectFile file, Dictionary<string, ProjectFile> views)
+        {
             string path = file.RelativePath;
-            if (path.EndsWith(DeviceSpecificExtension, StringComparison.OrdinalIgnoreCase)) {
-                int preSuffixIndex = path.Length - DeviceSpecificExtension.Length;
-                string desktopPath = path.Substring(0, preSuffixIndex) + ".cshtml";
-                if (views.ContainsKey(desktopPath)) {
-                    views.Remove(desktopPath);
-                    views.Remove(path);
-                }
+            
+            if (!path.EndsWith(DeviceSpecificExtension, StringComparison.OrdinalIgnoreCase)) return;
+            
+            int preSuffixIndex = path.Length - DeviceSpecificExtension.Length;
+            string desktopPath = path.Substring(0, preSuffixIndex) + ".cshtml";
+            if (views.ContainsKey(desktopPath))
+            {
+                views.Remove(desktopPath);
+                views.Remove(path);
             }
         }
 

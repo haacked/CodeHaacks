@@ -4,17 +4,22 @@ using System.Linq;
 using System.Web.Mvc;
 using MvcHaack.Ajax.Sample.Models;
 
-namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers {
-    public class ComicsController : JsonController {
+namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers
+{
+    public class ComicsController : JsonController
+    {
         private ComicContext db = new ComicContext();
 
-        public IEnumerable<ComicBook> List() {
+        public IEnumerable<ComicBook> List()
+        {
             return db.ComicBooks.ToList();
         }
 
         [HttpPost]
-        public ComicBook Create(ComicBook comicbook) {
-            if (ModelState.IsValid) {
+        public ComicBook Create(ComicBook comicbook)
+        {
+            if (ModelState.IsValid)
+            {
                 db.ComicBooks.Add(comicbook);
                 db.SaveChanges();
             }
@@ -22,21 +27,25 @@ namespace MvcHaack.Ajax.Sample.Areas.AjaxDemo.Controllers {
         }
 
         [HttpPost]
-        public void Edit(ComicBook comicbook) {
-            if (ModelState.IsValid) {
+        public void Edit(ComicBook comicbook)
+        {
+            if (ModelState.IsValid)
+            {
                 db.Entry(comicbook).State = EntityState.Modified;
                 db.SaveChanges();
             }
         }
 
         [HttpPost]
-        public void Delete(int id) {
+        public void Delete(int id)
+        {
             ComicBook comicbook = db.ComicBooks.Find(id);
             db.ComicBooks.Remove(comicbook);
             db.SaveChanges();
         }
 
-        protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing)
+        {
             db.Dispose();
             base.Dispose(disposing);
         }

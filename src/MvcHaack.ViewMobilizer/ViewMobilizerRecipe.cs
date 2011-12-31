@@ -6,16 +6,21 @@ using Microsoft.VisualStudio.Web.Mvc.Extensibility;
 using Microsoft.VisualStudio.Web.Mvc.Extensibility.Recipes;
 using MvcHaack.ViewMobilizer.Properties;
 
-namespace MvcHaack.ViewMobilizer {
+namespace MvcHaack.ViewMobilizer
+{
     [Export(typeof(IRecipe))]
-    public class ViewMobilizerRecipe : IFolderRecipe {
-        public bool Execute(ProjectFolder folder) {
+    public class ViewMobilizerRecipe : IFolderRecipe
+    {
+        public bool Execute(ProjectFolder folder)
+        {
             var model = new ViewMobilizerModel(folder);
             var form = new ViewMobilizerForm(model);
 
             var result = form.ShowDialog();
-            if (result == DialogResult.OK) {
-                foreach (var view in model.SelectedViews) {
+            if (result == DialogResult.OK)
+            {
+                foreach (var view in model.SelectedViews)
+                {
                     var file = view.Item1;
                     string mobileFileName = view.Item2;
 
@@ -26,19 +31,23 @@ namespace MvcHaack.ViewMobilizer {
             return true;
         }
 
-        public bool IsValidTarget(ProjectFolder folder) {
+        public bool IsValidTarget(ProjectFolder folder)
+        {
             return true;
         }
 
-        public string Description {
+        public string Description
+        {
             get { return "A package for creating display mode views."; }
         }
 
-        public Icon Icon {
+        public Icon Icon
+        {
             get { return Resources.ViewMobilizer; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return "View Mobilizer"; }
         }
     }
