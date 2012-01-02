@@ -53,7 +53,9 @@
     <Compile Include="ValidateJsonAntiForgeryTokenAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MvcHaack.Ajax.nuspec" />
+    <None Include="MvcHaack.Ajax.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />

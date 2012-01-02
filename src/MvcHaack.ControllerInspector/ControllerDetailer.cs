@@ -5,26 +5,34 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MvcHaack.ControllerInspector {
-    internal class ControllerDetailer {
-        public string GetControllerDetails(ControllerDescriptor controllerDescriptor, RequestContext requestContext) {
-            var template = new ControllerDetails {
+namespace MvcHaack.ControllerInspector
+{
+    internal class ControllerDetailer
+    {
+        public string GetControllerDetails(ControllerDescriptor controllerDescriptor, RequestContext requestContext)
+        {
+            var template = new ControllerDetails
+            {
                 Model = GetControllerModel(controllerDescriptor, requestContext)
             };
             return template.TransformText();
         }
 
-        private static object GetControllerModel(ControllerDescriptor controllerDescriptor, RequestContext requestContext) {
-            return new {
+        private static object GetControllerModel(ControllerDescriptor controllerDescriptor, RequestContext requestContext)
+        {
+            return new
+            {
                 ControllerName = controllerDescriptor.ControllerName,
-                ControllerType = new {
+                ControllerType = new
+                {
                     Name = controllerDescriptor.ControllerType.Name,
                     Namespace = controllerDescriptor.ControllerType.Namespace,
                     Attributes = GetAttributesModel(controllerDescriptor.GetCustomAttributes(inherit: true))
                 },
                 Actions = from action in controllerDescriptor.GetCanonicalActions()
                           let reflectedAction = action as ReflectedActionDescriptor
-                          select new {
+                          select new
+                          {
                               Name = action.ActionName,
                               Id = GetActionId(action),
                               Verbs = GetVerbs(action),
@@ -32,7 +40,8 @@ namespace MvcHaack.ControllerInspector {
                               MethodInfo = (reflectedAction != null ? reflectedAction.MethodInfo : null),
                               ReturnType = (reflectedAction != null ? reflectedAction.MethodInfo.ReturnType : null),
                               Parameters = from parameter in action.GetParameters()
-                                           select new {
+                                           select new
+                                           {
                                                Name = parameter.ParameterName,
                                                Type = parameter.ParameterType,
                                                IsComplexType = IsComplexType(parameter.ParameterType),
@@ -44,11 +53,13 @@ namespace MvcHaack.ControllerInspector {
                 GlobalFilters = from filter in GlobalFilters.Filters
                                 let filterInstance = filter.Instance
                                 let filterType = filterInstance.GetType()
-                                select new {
+                                select new
+                                {
                                     Name = filterType.Name,
                                     Namespace = filterType.Namespace,
                                     Properties = from property in filterType.GetProperties()
-                                                 select new {
+                                                 select new
+                                                 {
                                                      Name = property.Name,
                                                      Value = property.GetValue(filterInstance, null)
                                                  }
@@ -56,18 +67,22 @@ namespace MvcHaack.ControllerInspector {
             };
         }
 
-        private static IEnumerable<object> GetPropertiesModel(object o, Type t) {
+        private static IEnumerable<object> GetPropertiesModel(object o, Type t)
+        {
             return from property in t.GetProperties()
-                   select new {
+                   select new
+                   {
                        Name = property.Name,
                        Value = property.GetValue(o, null)
                    };
         }
 
-        private static IEnumerable<object> GetAttributesModel(IEnumerable<object> attributes) {
+        private static IEnumerable<object> GetAttributesModel(IEnumerable<object> attributes)
+        {
             return from attribute in attributes
                    let type = attribute.GetType()
-                   select new {
+                   select new
+                   {
                        Name = type.Name,
                        Type = type,
                        Namespace = type.Namespace,
@@ -75,31 +90,36 @@ namespace MvcHaack.ControllerInspector {
                    };
         }
 
-        private static IEnumerable<string> GetVerbs(ActionDescriptor action) {
+        private static IList<string> GetVerbs(ActionDescriptor action)
+        {
             var reflectedActionDescriptor = action as ReflectedActionDescriptor;
-            if (reflectedActionDescriptor != null) {
+            if (reflectedActionDescriptor != null)
+            {
                 var selectors = (ActionMethodSelectorAttribute[])reflectedActionDescriptor.MethodInfo.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), inherit: true);
-                return from selector in selectors
-                       where selector is HttpPostAttribute
-                           || selector is HttpGetAttribute
-                           || selector is HttpPutAttribute
-                           || selector is HttpDeleteAttribute
-                       select selector.GetType().Name.Replace("Http", "").Replace("Attribute", "");
+                return (from selector in selectors
+                        where selector is HttpPostAttribute
+                            || selector is HttpGetAttribute
+                            || selector is HttpPutAttribute
+                            || selector is HttpDeleteAttribute
+                        select selector.GetType().Name.Replace("Http", "").Replace("Attribute", "")).ToList();
 
             }
             return new string[] { };
         }
 
-        internal static string GetActionId(ActionDescriptor actionDescriptor) {
+        internal static string GetActionId(ActionDescriptor actionDescriptor)
+        {
             string actionName = actionDescriptor.ActionName;
             var verbs = GetVerbs(actionDescriptor);
-            if (verbs.Any()) {
+            if (verbs.Any())
+            {
                 actionName = actionName + ":" + String.Join(":", verbs);
             }
             return actionName;
         }
 
-        private static string GetSamplePath(RequestContext requestContext, ActionDescriptor action) {
+        private static string GetSamplePath(RequestContext requestContext, ActionDescriptor action)
+        {
             var urlHelper = new UrlHelper(requestContext);
 
             var actionNameAttrib = action.GetCustomAttributes(inherit: true).OfType<ActionNameAttribute>().FirstOrDefault();
@@ -108,7 +128,8 @@ namespace MvcHaack.ControllerInspector {
             // e.g. they could come from a POST body.
             // In that case, they may end up as bogus query string params on the path, which is a bit buggy
             var routeValues = new RouteValueDictionary();
-            foreach (ParameterDescriptor param in action.GetParameters()) {
+            foreach (ParameterDescriptor param in action.GetParameters())
+            {
                 routeValues.Add(param.ParameterName, GetDefaultValue(param));
             }
 
@@ -118,14 +139,17 @@ namespace MvcHaack.ControllerInspector {
                 routeValues);
         }
 
-        public static object GetDefaultValue(ParameterDescriptor param) {
+        public static object GetDefaultValue(ParameterDescriptor param)
+        {
             // If it's a string, giving some value based on the param name
-            if (param.ParameterType == typeof(string)) {
+            if (param.ParameterType == typeof(string))
+            {
                 return String.Format("Some{0}", param.ParameterName);
             }
 
             // If it's a number, pick some sample number.
-            switch (Type.GetTypeCode(param.ParameterType)) {
+            switch (Type.GetTypeCode(param.ParameterType))
+            {
                 case TypeCode.Byte:
                 case TypeCode.SByte:
                 case TypeCode.UInt16:
@@ -141,21 +165,24 @@ namespace MvcHaack.ControllerInspector {
             }
 
             // For other value types, go with the default value
-            if (param.ParameterType.IsValueType) {
+            if (param.ParameterType.IsValueType)
+            {
                 return Activator.CreateInstance(param.ParameterType);
             }
 
             return null;
         }
 
-        private static IEnumerable<object> GetInputModels(ControllerDescriptor controller) {
+        private static IEnumerable<object> GetInputModels(ControllerDescriptor controller)
+        {
             var models = from action in controller.GetCanonicalActions()
                          let parameters = action.GetParameters()
                          from parameter in parameters
                          let type = parameter.ParameterType
                          // using definition of complex type from ModelMetadata class
                          where IsComplexType(type)
-                         select new {
+                         select new
+                         {
                              Name = type.Name,
                              FullName = type.FullName,
                              Properties = type.GetProperties()
@@ -163,7 +190,8 @@ namespace MvcHaack.ControllerInspector {
             return models;
         }
 
-        private static bool IsComplexType(Type type) {
+        private static bool IsComplexType(Type type)
+        {
             return type != typeof(object) && !TypeDescriptor.GetConverter(type).CanConvertFrom(typeof(string));
         }
     }
