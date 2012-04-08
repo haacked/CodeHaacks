@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Security Demos";
+}
+
+<h2>@ViewBag.Message</h2>
+<p>
+
+    This site is a sample used to demonstrate a JSON Hijacking Attack as described in 
+    <a href="http://haacked.com/archive/2009/06/24/json-hijacking.aspx">this blog post</a>.
+</p>
+
+<p>
+    To see the attack in action,
+    @if (!Request.IsAuthenticated) {
+        @Html.ActionLink("first log in", "LogOn", "Account") @:(you might need to @Html.ActionLink("Register", "Register", "Account") first), and then 
+    } 
+    visit <a href="http://demo.haacked.com/security/JsonAttack.html">http://demo.haacked.com/security/JsonAttack.html</a>. 
+    If nothing happens, your browser is safe from this specific attack.
+</p>
