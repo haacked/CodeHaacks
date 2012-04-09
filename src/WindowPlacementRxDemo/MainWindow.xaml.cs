@@ -34,10 +34,10 @@ namespace WindowPlacementRxDemo
             this.RestorePlacement();
         }
 
-        protected override void OnClosed(EventArgs e)
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             this.SavePlacement();
-            base.OnClosed(e);
+            base.OnClosing(e);
         }
     }
 }
