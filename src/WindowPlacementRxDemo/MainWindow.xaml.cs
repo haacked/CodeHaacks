@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
 using ReactiveUI;
@@ -15,11 +16,13 @@ namespace WindowPlacementRxDemo
         {
             InitializeComponent();
 
-            Observable.FromEventPattern<SizeChangedEventHandler, SizeChangedEventArgs>
-                (h => SizeChanged += h, h => SizeChanged -= h)
-                .Select(e => EventArgs.Empty).Merge(Observable.FromEventPattern<EventHandler, EventArgs>
+            Observable.Merge(
+                Observable.FromEventPattern<SizeChangedEventHandler, SizeChangedEventArgs>
+                    (h => SizeChanged += h, h => SizeChanged -= h)
+                    .Select(e => Unit.Default),
+                Observable.FromEventPattern<EventHandler, EventArgs>
                                                         (h => LocationChanged += h, h => LocationChanged -= h)
-                                                        .Select(e => EventArgs.Empty)
+                                                        .Select(e => Unit.Default)
                 ).Throttle(TimeSpan.FromSeconds(5), RxApp.DeferredScheduler)
                 .Subscribe(_ =>
                 {
