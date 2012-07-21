@@ -10,11 +10,9 @@ namespace MvcHaack.ControllerInspector.DemoWeb.Controllers
     {
         public ActionResult Index(string id)
         {
-            var nonConventionalControllers = typeof (HomeController).Assembly.GetControllersThatViolateConvention();
-
             dynamic model = new ExpandoObject();
-            model.NonConventionalControllers = nonConventionalControllers.ToList();
-
+            model.NonConventionalControllers = typeof (HomeController).GetUnconventionalControllers().ToList();
+            model.NonPublicControllers = typeof (HomeController).GetNonPublicControllers().ToList();
             return View(model);
         }
 

@@ -16,3 +16,11 @@
         <li>@type.Name</li>
     }
 </ul>
+
+<h2>Controllers that cannot be instantiated</h2>
+<ul>
+@foreach (Type type in Model.NonPublicControllers)
+{
+    <li>@type.Name</li>
+}
+</ul>

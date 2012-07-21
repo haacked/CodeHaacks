@@ -10,18 +10,30 @@ namespace MvcHaack.ControllerInspector
     {
         public static bool AllControllersMeetConvention(this Assembly assembly)
         {
-            return assembly.GetControllersThatViolateConvention().Any();
+            return assembly.GetUnconventionalControllers().Any();
         }
 
-        public static IEnumerable<Type> GetControllersThatViolateConvention(this Type typeInAssembly)
+        public static IEnumerable<Type> GetUnconventionalControllers(this Type typeInAssembly)
         {
-            return typeInAssembly.Assembly.GetControllersThatViolateConvention();
+            return typeInAssembly.Assembly.GetUnconventionalControllers();
         }
 
-        public static IEnumerable<Type> GetControllersThatViolateConvention(this Assembly assembly)
+        public static IEnumerable<Type> GetUnconventionalControllers(this Assembly assembly)
         {
             return from t in assembly.GetLoadableTypes()
-                   where t.IsControllerType() && !t.MeetsConvention()
+                   where t.IsPublicClass() && t.IsControllerType() && !t.MeetsConvention()
+                   select t;
+        }
+
+        public static IEnumerable<Type> GetNonPublicControllers(this Type typeInAssembly)
+        {
+            return typeInAssembly.Assembly.GetNonPublicControllers();
+        }
+
+        public static IEnumerable<Type> GetNonPublicControllers(this Assembly assembly)
+        {
+            return from t in assembly.GetLoadableTypes()
+                   where !t.IsPublicClass() && t.IsControllerType() && t.MeetsConvention()
                    select t;
         }
 
@@ -30,12 +42,9 @@ namespace MvcHaack.ControllerInspector
             return (type != null && type.IsPublic && type.IsClass && !type.IsAbstract);
         }
 
-
         internal static bool IsControllerType(this Type t)
         {
-            return
-                t.IsPublicClass() &&
-                typeof (IController).IsAssignableFrom(t);
+            return typeof (IController).IsAssignableFrom(t);
         }
 
         public static bool MeetsConvention(this Type t)

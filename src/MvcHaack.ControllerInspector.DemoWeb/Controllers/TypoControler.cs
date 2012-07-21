@@ -16,4 +16,8 @@ namespace MvcHaack.ControllerInspector.DemoWeb.Controllers
         {
         }
     }
+
+    internal class InternalController : Controller
+    {
+    }
 }

@@ -11,12 +11,12 @@ namespace ControllerInspectorTests
 {
     public class ControllerValidatorTests
     {
-        public class TheGetControllersThatViolateConventionMethod
+        public class TheGetUnconventionalControllersMethod
         {
             [Fact]
             public void FindsControllersThatDoNotMeetConvention()
             {
-                var badControllers = typeof (ControllerValidatorTests).GetControllersThatViolateConvention().ToList();
+                var badControllers = typeof (ControllerValidatorTests).GetUnconventionalControllers().ToList();
 
                 foreach (var bad in badControllers)
                     Console.Write(bad.Name);
@@ -26,6 +26,23 @@ namespace ControllerInspectorTests
                 Assert.True(badControllers.Contains(typeof (AnotherBad)));
                 Assert.True(badControllers.Contains(typeof (YetAnotherBad)));
                 Assert.True(badControllers.Contains(typeof (NotOk)));
+            }
+        }
+
+        public class TheGetNonPublicControllers
+        {
+            [Fact]
+            public void FindsControllersThatDoNotMeetConvention()
+            {
+                var badControllers = typeof (ControllerValidatorTests).Assembly.GetNonPublicControllers().ToList();
+
+                foreach (var bad in badControllers)
+                    Console.Write(bad.Name);
+                Assert.Equal(3, badControllers.Count);
+
+                Assert.True(badControllers.Contains(typeof (NotOk.NestedController)));
+                Assert.True(badControllers.Contains(typeof (InternalController)));
+                Assert.True(badControllers.Contains(typeof (PrivateController)));
             }
         }
     }
@@ -90,6 +107,17 @@ namespace ControllerInspectorTests
     }
 
     public class NotOk : NotInstantiable
+    {
+        public class NestedController : Controller
+        {
+        }
+    }
+
+    internal class PrivateController : Controller
+    {
+    }
+
+    internal class InternalController : Controller
     {
     }
 }
