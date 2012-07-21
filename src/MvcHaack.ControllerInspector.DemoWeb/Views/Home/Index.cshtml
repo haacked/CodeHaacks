@@ -5,3 +5,14 @@
 <h2>Index</h2>
 
 <p>This is standard view.</p>
+
+<p>Append <code>?inspect</code> to the query string to see the magic.</p>
+<p>For more details, check out this <a href="http://haacked.com/archive/2011/08/10/writing-an-asp-net-mvc-controller-inspector.aspx">blog post</a>.</p>
+
+<h2>Controllers that violate conventions</h2>
+<ul>
+@foreach (Type type in Model)
+{
+    <li>@type.Name</li>
+}
+</ul>

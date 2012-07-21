@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace MvcHaack.ControllerInspector.DemoWeb.Controllers {
     [SomeFake]
     public class HomeController : Controller {
-        public ActionResult Index(string id) {
-            return View();
+        public ActionResult Index(string id)
+        {
+            var badControllers = typeof(HomeController).Assembly.GetControllersThatViolateConvention();
+            return View(badControllers.ToList());
         }
 
         [HttpPost]
