@@ -11,8 +11,8 @@
 
 <h2>Controllers that violate conventions</h2>
 <ul>
-@foreach (Type type in Model)
-{
-    <li>@type.Name</li>
-}
+    @foreach (Type type in Model.NonConventionalControllers)
+    {
+        <li>@type.Name</li>
+    }
 </ul>

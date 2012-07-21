@@ -11,5 +11,9 @@ namespace MvcHaack.ControllerInspector.DemoWeb.Controllers
         {
             return "Test";
         }
+
+        public class BadNestedController : Controller
+        {
+        }
     }
 }

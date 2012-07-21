@@ -1,50 +1,64 @@
 ﻿using System;
+using System.Dynamic;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace MvcHaack.ControllerInspector.DemoWeb.Controllers {
+namespace MvcHaack.ControllerInspector.DemoWeb.Controllers
+{
     [SomeFake]
-    public class HomeController : Controller {
+    public class HomeController : Controller
+    {
         public ActionResult Index(string id)
         {
-            var badControllers = typeof(HomeController).Assembly.GetControllersThatViolateConvention();
-            return View(badControllers.ToList());
+            var nonConventionalControllers = typeof (HomeController).Assembly.GetControllersThatViolateConvention();
+
+            dynamic model = new ExpandoObject();
+            model.NonConventionalControllers = nonConventionalControllers.ToList();
+
+            return View(model);
         }
 
         [HttpPost]
         [HttpPut]
-        public ActionResult Index(string id, object something) {
+        public ActionResult Index(string id, object something)
+        {
             return View();
         }
 
         [Authorize]
         [ActionName("GetAll")]
-        public ActionResult List(string id = "Some default value") {
+        public ActionResult List(string id = "Some default value")
+        {
             return View();
         }
 
-        public string List(SomeModel model) {
+        public string List(SomeModel model)
+        {
             return "Test";
         }
 
         [ActionName("Bar")]
-        public ActionResult MethodWithNumericParam(short id) {
+        public ActionResult MethodWithNumericParam(short id)
+        {
             return View();
         }
 
         [HttpPost]
-        public ActionResult MethodWithNonRouteParam(string hello) {
+        public ActionResult MethodWithNonRouteParam(string hello)
+        {
             return View();
         }
     }
 
-    public class SomeModel {
+    public class SomeModel
+    {
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Cost { get; set; }
     }
 
     [AttributeUsage(AttributeTargets.All)]
-    public class SomeFakeAttribute : Attribute {
+    public class SomeFakeAttribute : Attribute
+    {
     }
 }
