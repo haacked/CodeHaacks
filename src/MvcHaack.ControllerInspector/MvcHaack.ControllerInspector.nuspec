@@ -12,6 +12,7 @@
     <description>$description$</description>
     <releaseNotes>
         1.0.0.1 Fixed a nullref issue when using qeury strings other than ?inspect
+        1.1.0 Added ControllerValidator class for finding bad controllers.
     </releaseNotes>
     <tags>aspnetmvc controllerdescriptor controller</tags>
   </metadata>
