@@ -18,8 +18,6 @@ namespace ControllerInspectorTests
             {
                 var badControllers = typeof (ControllerValidatorTests).GetUnconventionalControllers().ToList();
 
-                foreach (var bad in badControllers)
-                    Console.Write(bad.Name);
                 Assert.Equal(4, badControllers.Count);
 
                 Assert.True(badControllers.Contains(typeof (Bad)));
@@ -29,15 +27,13 @@ namespace ControllerInspectorTests
             }
         }
 
-        public class TheGetNonPublicControllers
+        public class TheGetNonPublicControllersMethod
         {
             [Fact]
             public void FindsControllersThatDoNotMeetConvention()
             {
                 var badControllers = typeof (ControllerValidatorTests).Assembly.GetNonPublicControllers().ToList();
 
-                foreach (var bad in badControllers)
-                    Console.Write(bad.Name);
                 Assert.Equal(3, badControllers.Count);
 
                 Assert.True(badControllers.Contains(typeof (NotOk.NestedController)));
@@ -45,6 +41,23 @@ namespace ControllerInspectorTests
                 Assert.True(badControllers.Contains(typeof (PrivateController)));
             }
         }
+
+        public class TheGetNonControllersNamedWithControllerSuffixMethod
+        {
+            [Fact]
+            public void FindsClassesWithControllerSuffixButAreNotControllers()
+            {
+                var badControllers = typeof (ControllerValidatorTests).Assembly.GetNonControllersNamedWithControllerSuffix().ToList();
+
+                Assert.Equal(1, badControllers.Count);
+
+                Assert.True(badControllers.Contains(typeof (FakeController)));
+            }
+        }
+    }
+
+    public class FakeController
+    {
     }
 
     internal static class MediumTrustContext

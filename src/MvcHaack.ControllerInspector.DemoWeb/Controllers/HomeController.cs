@@ -13,6 +13,7 @@ namespace MvcHaack.ControllerInspector.DemoWeb.Controllers
             dynamic model = new ExpandoObject();
             model.NonConventionalControllers = typeof (HomeController).GetUnconventionalControllers().ToList();
             model.NonPublicControllers = typeof (HomeController).GetNonPublicControllers().ToList();
+            model.NonControllers = typeof (HomeController).GetNonControllersNamedWithControllerSuffix().ToList();
             return View(model);
         }
 

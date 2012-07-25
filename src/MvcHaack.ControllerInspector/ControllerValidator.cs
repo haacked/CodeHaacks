@@ -37,17 +37,29 @@ namespace MvcHaack.ControllerInspector
                    select t;
         }
 
-        private static bool IsPublicClass(this Type type)
+        public static IEnumerable<Type> GetNonControllersNamedWithControllerSuffix(this Type typeInAssembly)
+        {
+            return typeInAssembly.Assembly.GetNonControllersNamedWithControllerSuffix();
+        }
+
+        public static IEnumerable<Type> GetNonControllersNamedWithControllerSuffix(this Assembly assembly)
+        {
+            return from t in assembly.GetLoadableTypes()
+                   where t.IsPublicClass() && !t.IsControllerType() && t.MeetsConvention()
+                   select t;
+        }
+
+        static bool IsPublicClass(this Type type)
         {
             return (type != null && type.IsPublic && type.IsClass && !type.IsAbstract);
         }
 
-        internal static bool IsControllerType(this Type t)
+        static bool IsControllerType(this Type t)
         {
             return typeof (IController).IsAssignableFrom(t);
         }
 
-        public static bool MeetsConvention(this Type t)
+        static bool MeetsConvention(this Type t)
         {
             return t.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase);
         }

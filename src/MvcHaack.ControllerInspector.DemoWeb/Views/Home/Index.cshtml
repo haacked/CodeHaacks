@@ -19,7 +19,15 @@
 
 <h2>Controllers that cannot be instantiated</h2>
 <ul>
-@foreach (Type type in Model.NonPublicControllers)
+    @foreach (Type type in Model.NonPublicControllers)
+    {
+        <li>@type.Name</li>
+    }
+</ul>
+
+<h2>Controllers that do not derive from controller</h2>
+<ul>
+@foreach (Type type in Model.NonControllers)
 {
     <li>@type.Name</li>
 }
