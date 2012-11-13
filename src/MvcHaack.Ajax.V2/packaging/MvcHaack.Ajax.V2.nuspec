@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>MvcHaack.Ajax.MVC4bugfixfork</id>
+        <version>2.0.0.0</version>
+        <authors>Phil Haack</authors>
+        <owners>Phil Haack</owners>
+        <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+        <projectUrl>https://github.com/Haacked/CodeHaacks</projectUrl>
+        <iconUrl>http://haacked.com/images/Inspector-120x120.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>See MvcHaack.Ajax package description</description>
+        <dependencies>
+          <dependency id="Microsoft.AspNet.Mvc" version="4.0.0" />
+        </dependencies>
+        <releaseNotes>
+          MVCHaack.Ajax 2.0.0 Version of MVCHaack.Ajax which is compatible with MVC4 (and maybe not with MVC3).
+          MVCHaack.Ajax 1.0.1 alerts users when using in IE 8 or less without the json2 library referenced.
+        </releaseNotes>
+        <tags>aspnetmvc asp.net aspnet asp.net-mvc controllerdescriptor controller</tags>
+    </metadata>
+</package>
