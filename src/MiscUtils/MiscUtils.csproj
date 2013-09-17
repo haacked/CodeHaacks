@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributeExtensions.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="PathString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
