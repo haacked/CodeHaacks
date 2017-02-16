@@ -65,11 +65,23 @@ namespace MiscUtils
  
         private static object GetArgumentValue(this CustomAttributeTypedArgument argument)
         {
-            var value = argument.Value;
+            object value;
+            
+            if (argument.ArgumentType.IsEnum)
+            {
+                value = Enum.ToObject(argument.ArgumentType, argument.Value);
+            }
+            else
+            {
+                value = argument.Value;
+            }
+            
             var collectionValue = value as ReadOnlyCollection<CustomAttributeTypedArgument>;
             return collectionValue != null
-                ? ConvertCustomAttributeTypedArgumentArray(collectionValue, argument.ArgumentType.GetElementType())
-                : value;
+                       ? ConvertCustomAttributeTypedArgumentArray(
+                           collectionValue,
+                           argument.ArgumentType.GetElementType())
+                       : value;
         }
 
         private static Array ConvertCustomAttributeTypedArgumentArray(
